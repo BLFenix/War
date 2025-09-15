@@ -73,17 +73,17 @@ void atacar(Territorio *atacante, Territorio *defensor)
     printf("%s (atacante) rola %d\n", atacante->nome, dadoAtacante);
     printf("%s (defensor) rola %d\n", defensor->nome, dadoDefensor);
 
-    if (dadoAtacante > dadoDefensor)
+    if (atacante->tropas <= 0)
+    {
+        printf("O território %s não tem tropas suficientes para atacar!\n", atacante->nome);
+        return;
+    }
+    else if (dadoAtacante > dadoDefensor)
     {
         printf("Atacante vence!\n");
         defensor->tropas--; // Menos 1 tropa
 
-        if (atacante->tropas <= 0)
-        {
-            printf("O território %s não tem tropas suficientes para atacar!\n", atacante->nome);
-            return;
-        }
-        else if (defensor->tropas <= 0)
+        if (defensor->tropas <= 0)
         {
             printf("O território %s foi dominado por %s!\nNova cor: %s\n", defensor->nome, atacante->nome, atacante->cor);
             strcpy(defensor->cor, atacante->cor); // Mudança de dono
